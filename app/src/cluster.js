@@ -87,7 +87,7 @@ export default class Cluster extends PIXI.Graphics {
 
         const maxWidth = (window.innerWidth * (1/this.config.initialScale)) - (this.heightOfWorkerNodePx * 1.2)
 
-        for (const nodeName of Object.keys(this.cluster.nodes).sort()) {
+        for (const nodeName of Object.values(this.cluster.nodes).sort(function(e1, e2) { return e1.labels['alpha.eksctl.io/nodegroup-name'].localeCompare(e2.labels['alpha.eksctl.io/nodegroup-name']) }).map(function(e) { return e.name})) {
             const node = this.cluster.nodes[nodeName]
             let nodeBox = null
 
@@ -152,7 +152,7 @@ export default class Cluster extends PIXI.Graphics {
 
         const topHandle = this.topHandle = new PIXI.Graphics()
         topHandle.beginFill(App.current.theme.primaryColor, 1)
-        topHandle.drawRect(0, 0, width, App.current.heightOfTopHandlePx)
+        topHandle.drawRect(0, 0, width, App.current.heightOfTopHandlePx / 2)
         topHandle.endFill()
         topHandle.interactive = true
         topHandle.buttonMode = true

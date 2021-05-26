@@ -73,7 +73,8 @@ export class Node extends PIXI.Graphics {
 
         // there is about 2.83 letters per pod
         const roomForText = Math.floor(2.83 * this.podsPerRow)
-        const ellipsizedNodeName = this.node.name.length > roomForText ? this.node.name.substring(0, roomForText).concat('…') : this.node.name
+        const nodeGroup= this.node.labels['alpha.eksctl.io/nodegroup-name']
+        const ellipsizedNodeName = nodeGroup + '\n' + (this.node.name.length > roomForText ? this.node.name.substring(0, roomForText).concat('…') : this.node.name)
         const text = new PIXI.Text(ellipsizedNodeName, {fontFamily: 'ShareTechMono', fontSize: 10, fill: 0x000000})
         text.x = 2
         text.y = 2

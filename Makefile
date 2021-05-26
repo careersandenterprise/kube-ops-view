@@ -1,6 +1,6 @@
 .PHONY: clean test appjs docker push mock
 
-IMAGE            ?= hjacobs/kube-ops-view
+IMAGE            ?= careersandenterprise/kube-ops-view
 VERSION          ?= $(shell git describe --tags --always --dirty)
 TAG              ?= $(VERSION)
 TTYFLAGS         = $(shell test -t 0 && echo "-it")

@@ -95,7 +95,7 @@ def query_mock_cluster(cluster):
         # add/remove the second to last node every 13 seconds
         if i == 8 and int(time.time() / 13) % 2 == 0:
             continue
-        labels = {}
+        labels = {"alpha.eksctl.io/nodegroup-name": "development-0" if i % 2 == 0 else "production-critical-0" }
         # only the first two clusters have master nodes
         if i < 2 and index < 2:
             if index == 0:
@@ -138,6 +138,7 @@ def query_mock_cluster(cluster):
             "usage": {"cpu": f"{usage_cpu}m", "memory": f"{usage_memory}Mi"},
         }
         nodes[node["name"]] = node
+    #nodes = {k: v for k, v in sorted(nodes.items(), key=lambda e: e[1]['labels']['alpha.eksctl.io/nodegroup-name'])}
     pod = generate_mock_pod(index, 11, index)
     unassigned_pods = {"{}/{}".format(pod["namespace"], pod["name"]): pod}
     return {

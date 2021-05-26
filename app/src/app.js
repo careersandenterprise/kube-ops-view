@@ -48,7 +48,7 @@ export default class App {
         this.defaultWidthOfNodePx = 105
         this.defaultHeightOfNodePx = 115
         this.sizeOfPodPx = 13
-        this.heightOfTopHandlePx = 15
+        this.heightOfTopHandlePx = 30
     }
 
     parseLocationHash() {
